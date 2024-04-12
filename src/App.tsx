@@ -4,7 +4,6 @@ import Signin from './pages/Signin'
 import { Blog } from './pages/Blog'
 import Blogs from './pages/Blogs'
 import AddBlog from './pages/AddBlog'
-import { ToastContainer } from "react-toastify"
 
 
 function App() {

@@ -13,7 +13,7 @@ const BlogCard = ({ author, title, content, publishedDate, id }: blogCardProps) 
         <Link to={`/blog/${id}`}>
             <div className=" flex flex-col gap-1">
                 <div className=" flex items-center gap-1">
-                    <Avatar name={author} size={"5"} fontsize="xs" />
+                    <Avatar name={author} size={5} />
                     <div className=" text-xs font">{author} <span className=" text-slate-400"> &#x2022; {publishedDate}</span></div>
                 </div>
                 <div className=" font-bold text-xl">{title}</div>
