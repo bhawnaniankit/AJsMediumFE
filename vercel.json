@@ -3,6 +3,26 @@
         {
             "src": "/",
             "dest": "/"
+        },
+        {
+            "src": "/signup",
+            "dest": "/"
+        },
+        {
+            "src": "/signin",
+            "dest": "/"
+        },
+        {
+            "src": "/blog",
+            "dest": "/"
+        },
+        {
+            "src": "/blogs",
+            "dest": "/"
+        },
+        {
+            "src": "/write",
+            "dest": "/"
         }
     ]
 }
