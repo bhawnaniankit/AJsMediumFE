@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { CgProfile } from "react-icons/cg";
 
 interface blogCardProps {
     id: string,
@@ -12,8 +13,8 @@ const BlogCard = ({ author, title, content, publishedDate, id }: blogCardProps) 
     return (
         <Link to={`/blog/${id}`}>
             <div className=" flex flex-col gap-1">
-                <div className=" flex items-center gap-1">
-                    <Avatar name={author} size={5} />
+                <div className=" text-xl flex items-center gap-1">
+                    <CgProfile></CgProfile>
                     <div className=" text-xs font">{author} <span className=" text-slate-400"> &#x2022; {publishedDate}</span></div>
                 </div>
                 <div className=" font-bold text-xl">{title}</div>
@@ -24,14 +25,4 @@ const BlogCard = ({ author, title, content, publishedDate, id }: blogCardProps) 
     )
 }
 
-export function Avatar({ size, name }: { size: number, name: string }) {
-
-    return <div className={` cursor-pointer flex items-center justify-center bg-gray-500 text-white rounded-full h-${size} w-${size} text-center`}>
-        <div>
-            {name[0]}
-        </div>
-    </div>
-
-
-}
 export default BlogCard

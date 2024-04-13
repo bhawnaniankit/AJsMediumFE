@@ -7,7 +7,6 @@ import AddBlog from './pages/AddBlog'
 
 
 function App() {
-
   return (
     <>
       <BrowserRouter>

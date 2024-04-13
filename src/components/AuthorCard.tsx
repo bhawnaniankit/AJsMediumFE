@@ -1,4 +1,5 @@
-import { Avatar } from "./BlogCard"
+import { CgProfile } from "react-icons/cg";
+
 
 interface Author {
     "id": string,
@@ -11,8 +12,10 @@ const AuthorCard = ({ data }: { data: Author }) => {
     return (
         <div className=" flex flex-col gap-1">
             <div className=" font-semibold">Author:</div>
-            <div className=" flex gap-2">
-                <Avatar name={data.name} size={8} ></Avatar>
+            <div className=" items-start flex gap-2">
+                <div className=" text-2xl m-1">
+                    <CgProfile></CgProfile>
+                </div>
                 <div>
                     <div className=" font-semibold text-lg font-sans">
                         {data.name}
