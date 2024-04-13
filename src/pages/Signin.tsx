@@ -3,7 +3,7 @@ import { Quote } from "../components/Quote"
 
 const Signin = () => {
     return (
-        <div className=" grid md:grid-cols-2">
+        <div className=" flex flex-col-reverse md:grid md:grid-cols-2 gap-4">
             <SigninCompo></SigninCompo>
             <Quote></Quote>
         </div>

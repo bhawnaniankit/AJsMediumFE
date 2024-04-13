@@ -25,11 +25,6 @@ const Blogs = () => {
     const { loading, blogs } = useBlogs();
     const navigate = useNavigate();
     const jwt = localStorage.getItem("token");
-    // const [user, setUser] = useState<userType>({
-    //     name: "",
-    //     username: "",
-    //     email: ""
-    // })
     useEffect(() => {
         if (!jwt) {
             navigate("/signin")
@@ -42,16 +37,18 @@ const Blogs = () => {
 
 
     if (loading) {
-        return (<div className=" flex  flex-col gap-12">
+        return (<div className=" flex  flex-col md:gap-12">
             <AppBar author={userGlobal.name} ></AppBar>
-            <div className=" flex mx-44">
+            <div className=" flex md:mx-44">
                 <div className=" flex-1 flex flex-col gap-4 px-8">
                     <ToolBar></ToolBar>
-                    <BlogSkleton></BlogSkleton>
-                    <BlogSkleton></BlogSkleton>
-                    <BlogSkleton></BlogSkleton>
-                    <BlogSkleton></BlogSkleton>
-                    <BlogSkleton></BlogSkleton>
+                    <div className=" flex flex-col gap-8">
+                        <BlogSkleton></BlogSkleton>
+                        <BlogSkleton></BlogSkleton>
+                        <BlogSkleton></BlogSkleton>
+                        <BlogSkleton></BlogSkleton>
+                        <BlogSkleton></BlogSkleton>
+                    </div>
                 </div >
                 {/* <div>RIght </div> */}
             </div>
@@ -59,10 +56,10 @@ const Blogs = () => {
         )
     }
 
-    return (<div className=" flex flex-col gap-12">
+    return (<div className=" flex flex-col gap-4 md:gap-12">
         <AppBar author={userGlobal.name}></AppBar>
-        <div className=" flex mx-44">
-            <div className=" flex-1 flex flex-col gap-4 px-8">
+        <div className=" flex md:mx-44">
+            <div className=" flex-1 flex flex-col gap-2 md:gap-4 px-8">
                 <ToolBar></ToolBar>
                 {blogs.map((blog) => {
                     const date = blog.createdAt;

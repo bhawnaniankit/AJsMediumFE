@@ -20,7 +20,7 @@ export const Blog = () => {
     return (
         <>
             <AppBar author={userGlobal.name}></AppBar>
-            <div className=" flex gap-8 mx-52 my-10">
+            <div className=" flex-col md:flex-row flex gap-8 mx-10 my-6 md:mx-44 md:my-10">
                 <InidiBlog data={indiBlog}></InidiBlog>
                 <AuthorCard data={indiBlog.author}></AuthorCard>
             </div>

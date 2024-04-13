@@ -24,7 +24,7 @@ export const SigninCompo = () => {
     }
 
     return (
-        <div className=' flex flex-col justify-center items-center'>
+        <div className=' h-screen flex flex-col justify-center items-center'>
             <div>
                 <div className=' text-center '>
                     <div className='my-1 text-3xl font-bold'>Create an Account</div>
@@ -34,7 +34,7 @@ export const SigninCompo = () => {
                 <div className=' m-w-md flex flex-col my-4 items-start'>
                     <LabledInput label='Username' type="text" placeholder='Enter your username' onchange={(e) => { setsigninInputs({ ...signinInputs, username: e.target.value }) }}></LabledInput>
                     <LabledInput label='Password' type="password" placeholder='Enter your password' onchange={(e) => { setsigninInputs({ ...signinInputs, password: e.target.value }) }}></LabledInput>
-                    <button onClick={signRequest} className=' min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign In</button>
+                    <button onClick={signRequest} className=' w-full md:min-w-80 lg:min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign In</button>
                 </div>
             </div>
         </div>
@@ -51,6 +51,6 @@ interface LabledInputTypes {
 function LabledInput({ label, placeholder, onchange, type }: LabledInputTypes) {
     return <>
         <label className=' text-base font-semibold my-2' >{label}</label>
-        <input onChange={onchange} className=' min-w-96 border-2 p-2 rounded-md text-slate-400' type={type} placeholder={placeholder} />
+        <input onChange={onchange} className=' w-full lg:min-w-96 md:min-w-80 border-2 p-2 rounded-md text-slate-400' type={type} placeholder={placeholder} />
     </>
 }

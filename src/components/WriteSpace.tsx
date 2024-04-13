@@ -42,9 +42,9 @@ const WriteSpace = () => {
         }
     }
     return (
-        <div className=" flex flex-col h-screen">
-            <input type="text" onChange={(e) => { setTitle(e.target.value) }} placeholder="Title" className=" border-l-2  focus:outline-0 p-4 text-4xl  " />
-            <textarea onChange={(e) => { setContent(e.target.value) }} className=" p-4  focus:outline-0 resize-none text-lg" placeholder="Tell Your Story" cols={100} rows={15}></textarea>
+        <div className=" w-full flex flex-col h-screen">
+            <input type="text" onChange={(e) => { setTitle(e.target.value) }} placeholder="Title" className=" border border-l-2 focus:outline-0 p-4 text-2xl md:text-4xl  " />
+            <textarea onChange={(e) => { setContent(e.target.value) }} className=" h-full border md:pr-10 p-4 block w-full focus:outline-0 text-sm md:text-lg" placeholder="Tell Your Story" ></textarea>
             <hr />
             <div className=" mx-4 justify-end flex gap-3">
                 <button onClick={async () => {

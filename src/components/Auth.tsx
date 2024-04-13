@@ -26,8 +26,8 @@ const Auth = () => {
     }
 
     return (
-        <div className=' flex flex-col justify-center items-center'>
-            <div>
+        <div className='h-screen flex flex-col justify-center items-center'>
+            <div className=''>
                 <div className=' text-center '>
                     <div className='my-1 text-3xl font-bold'>Create an Account</div>
                     <div className=' text-slate-400'>Already have an account? <Link to="/signin"><u>Login</u></Link></div>
@@ -38,7 +38,7 @@ const Auth = () => {
                     <LabledInput label='Username' type="text" placeholder='Enter your username' onchange={(e) => { setSignupInputs({ ...signupInputs, username: e.target.value }) }}></LabledInput>
                     <LabledInput label='Email' type="text" placeholder='m@example.com' onchange={(e) => { setSignupInputs({ ...signupInputs, email: e.target.value }) }}></LabledInput>
                     <LabledInput label='Password' type="password" placeholder='Enter your password' onchange={(e) => { setSignupInputs({ ...signupInputs, password: e.target.value }) }}></LabledInput>
-                    <button onClick={signRequest} className=' md:min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign Up</button>
+                    <button onClick={signRequest} className=' w-full md:min-w-80 lg:min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign Up</button>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ interface LabledInputTypes {
 function LabledInput({ label, placeholder, onchange, type }: LabledInputTypes) {
     return <>
         <label className=' text-base font-semibold my-2' >{label}</label>
-        <input onChange={onchange} className='md:min-w-96 border-2 p-2 rounded-md text-slate-400' type={type} placeholder={placeholder} />
+        <input onChange={onchange} className=' w-full lg:min-w-96 md:min-w-80 border-2 p-2 rounded-md text-slate-400' type={type} placeholder={placeholder} />
     </>
 }
 

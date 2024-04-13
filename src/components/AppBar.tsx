@@ -10,15 +10,15 @@ const AppBar = ({ author }: { author: string }) => {
         Navigate("/signin")
     }
     return (
-        <div className=" sticky top-0 bg-white border-b py-2 px-12 flex items-center justify-between">
+        <div className=" sticky top-0 bg-white border-b px-4 py-2 md:px-12 flex items-center justify-between">
             <div className=" items-center flex gap-6">
-                <div className="  font-bold text-2xl">{"<MEDIUM"}</div>
-                <input className=" bg-gray-100 rounded-full py-1  px-4" type="text" placeholder="Search" />
+                <div className=" text-lg font-bold md:text-2xl">{"<MEDIUM"}</div>
+                <input className="hidden md:inline-block bg-gray-100 rounded-full py-1  px-4" type="text" placeholder="Search" />
             </div>
             <div className=" text-xl flex items-center gap-5">
-                <Link to={"/write"}> <IoIosAdd></IoIosAdd></Link>
-                <div className=" text-lg">{author}</div>
-                <div onClick={logoutHandler} className=" cursor-pointer text-2xl">
+                <Link className=" hidden md:block" to={"/write"}> <IoIosAdd></IoIosAdd></Link>
+                <div className=" text-sm md:text-lg">{author}</div>
+                <div onClick={logoutHandler} className=" cursor-pointer text-sm md:text-2xl">
                     <IoIosLogOut></IoIosLogOut>
                 </div>
             </div>
