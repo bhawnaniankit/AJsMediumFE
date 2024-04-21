@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { BACKEND_URL } from "../config";
+import { toast } from "react-toastify";
 
 export interface Blog {
     "id": string,
@@ -24,7 +25,10 @@ function useBlogs() {
         }).then((res) => {
             setBlogs(res.data);
             setLoading(false);
-        })
+        }).catch(((e:any)=>{
+            toast.error(e.response.data.erro,{
+                position: "bottom-right"})
+        }))
     }, []);
 
     return { loading, blogs };

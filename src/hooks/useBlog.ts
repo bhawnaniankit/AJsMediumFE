@@ -36,6 +36,8 @@ export function useBlog({ id }: { id: string }) {
         }).then((res) => {
             setIndiBlog(res.data.blog);
             setLoading(false);
+        }).catch(()=>{
+            // throw new Error(e.response.data.error);
         })
     }, [id]);
 

@@ -1,7 +1,7 @@
 
 export const Quote = () => {
     return (
-        <div className='bg-slate-100 h-screen flex justify-center flex-col items-center'>
+        <div className='bg-slate-100/50 h-screen flex justify-center flex-col items-center'>
             <div className=' mx-8 max-w-lg'>
                 <div className=' font-bold  text-2xl'>
                     "The customer service I recieved was exceptional. The support team went above and beyond to address my concerns."

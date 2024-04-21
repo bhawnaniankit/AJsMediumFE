@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { SignupInput } from '@aj_devs/common-final';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Auth = () => {
     const navigate = useNavigate();
@@ -20,8 +22,9 @@ const Auth = () => {
             navigate("/blogs");
         }
         catch (e) {
-
-            //alert
+            if(axios.isAxiosError(e)){
+                toast.error(e.response?.data.message)
+            }
         }
     }
 
@@ -39,6 +42,7 @@ const Auth = () => {
                     <LabledInput label='Email' type="text" placeholder='m@example.com' onchange={(e) => { setSignupInputs({ ...signupInputs, email: e.target.value }) }}></LabledInput>
                     <LabledInput label='Password' type="password" placeholder='Enter your password' onchange={(e) => { setSignupInputs({ ...signupInputs, password: e.target.value }) }}></LabledInput>
                     <button onClick={signRequest} className=' w-full md:min-w-80 lg:min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign Up</button>
+                    <ToastContainer position="bottom-right"></ToastContainer>
                 </div>
             </div>
         </div>

@@ -2,7 +2,8 @@ import { ChangeEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { SigninInput } from '@aj_devs/common-final';
 import { BACKEND_URL } from '../config';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const SigninCompo = () => {
     const navigate = useNavigate();
@@ -13,13 +14,19 @@ export const SigninCompo = () => {
 
     async function signRequest() {
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, signinInputs);
-            localStorage.setItem("token", response.data.jwt);
-            navigate("/blogs");
+            axios.post(`${BACKEND_URL}/api/v1/user/signin`, signinInputs).then((response)=>{
+                const jwt=response.data.jwt;
+                if(jwt){
+                    localStorage.setItem("token",jwt );
+                    navigate("/blogs");
+                }    
+            }).catch((e:AxiosError<{error:string}>)=>{
+                toast.error(e.response?.data.error)
+            });
         }
         catch (e) {
-
-            //alert
+            console.log(e);
+            toast("Error While Logging in")
         }
     }
 
@@ -35,6 +42,7 @@ export const SigninCompo = () => {
                     <LabledInput label='Username' type="text" placeholder='Enter your username' onchange={(e) => { setsigninInputs({ ...signinInputs, username: e.target.value }) }}></LabledInput>
                     <LabledInput label='Password' type="password" placeholder='Enter your password' onchange={(e) => { setsigninInputs({ ...signinInputs, password: e.target.value }) }}></LabledInput>
                     <button onClick={signRequest} className=' w-full md:min-w-80 lg:min-w-96 border-2 p-2 bg-black my-4 font-bold rounded-md text-white'>Sign In</button>
+                    <ToastContainer position="bottom-right"></ToastContainer>
                 </div>
             </div>
         </div>
