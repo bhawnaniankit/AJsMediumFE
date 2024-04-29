@@ -1,7 +1,7 @@
 import axios, { isAxiosError } from "axios"
 import { useState } from "react"
 import { BACKEND_URL } from "../config"
-import { toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
 
@@ -9,9 +9,6 @@ const WriteSpace = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState<string>("")
     const [content, setContent] = useState<string>("")
-
-    toast.error("fdfdfdf");
-
     async function saveDraft() {
         try {
             const res = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
@@ -50,17 +47,18 @@ const WriteSpace = () => {
                 <button onClick={async () => {
                     const res = await saveDraft();
                     publishBlog(res.id);
-                    alert("Published")
-                    navigate("/blogs")
+                    toast.done("Published")
+                    // navigate("/blogs")
 
                 }} className=" border-2 p-2 bg-black my-4 font-semibold rounded-md text-white">Publish</button>
                 <button onClick={() => {
                     saveDraft()
-                    alert("Draft Saved")
+                    toast.done("Draft Saved")
                     navigate("/blogs")
 
                 }} className="border-2 p-2 bg-black my-4 font-semibold rounded-md text-white">Save Draft</button>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     )
 }

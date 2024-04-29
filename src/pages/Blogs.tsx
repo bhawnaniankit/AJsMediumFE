@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { getTime } from "../utills/getTime"
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export interface userType {
     name: string,
@@ -32,6 +33,7 @@ const Blogs = () => {
         }
         axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).then((res) => {
             userGlobal = res.data;
+            Object.freeze(userGlobal)
         })
     }, [])
 
@@ -61,10 +63,23 @@ const Blogs = () => {
         <div className=" flex md:mx-44">
             <div className=" flex-1 flex flex-col gap-2 md:gap-4 px-8">
                 <ToolBar></ToolBar>
-                {blogs.map((blog) => {
-                    const date = blog.createdAt;
-                    return <BlogCard author={blog.author.name} id={blog.id} title={blog.title} content={`${blog.content.slice(0, 500)}....`} publishedDate={getTime(date)}></BlogCard>
-                })}
+                <div>
+                    <InfiniteScroll
+                    dataLength={blogs.length}
+                    next={()=>{console.log("fetch");
+                    }}
+                    hasMore={true} // Replace with a condition based on your data source
+                    loader={<p>Loading...</p>}
+                    endMessage={<p>No more data to load.</p>}
+                    >
+                    <ul>
+                        {blogs.map(blog => {
+                        const date = blog.createdAt;
+                        return <li key={blog.id}><BlogCard key={blog.id} author={blog.author.name} id={blog.id} title={blog.title} content={`${blog.content.slice(0, 500)}....`} publishedDate={getTime(date)}></BlogCard></li>
+                        })}
+                    </ul>
+                    </InfiniteScroll>
+                </div>
             </div >
             {/* <div>RIght </div> */}
         </div>

@@ -3,7 +3,7 @@ import { IoIosAdd } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = ({ author }: { author: string }) => {
+const AppBar = ({ author }: { author: string }) => {    
     const Navigate = useNavigate();
     function logoutHandler() {
         localStorage.removeItem("token");
