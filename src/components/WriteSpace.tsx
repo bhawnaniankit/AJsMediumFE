@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from "axios"
+import axios, {  isAxiosError } from "axios"
 import { useState } from "react"
 import { BACKEND_URL } from "../config"
 import { ToastContainer, toast } from "react-toastify"
@@ -48,25 +48,29 @@ const WriteSpace = () => {
                     const res = await toast.promise(
                         saveDraft(),
                         {
-                          pending: 'Promise is pending',
-                          success: 'Promise resolved 👌',
-                          error: 'Promise rejected 🤯'
+                          pending: 'Loaing...',
+                          success: 'Blog Published',
+                          error: 'Error while publishing blog'
                         }
                     )
                     publishBlog(res?.data.id);
                     toast.done("Published")
-                    // navigate("/blogs")
+                    navigate("/blogs")
 
                 }} className=" border-2 p-2 bg-black my-4 font-semibold rounded-md text-white">Publish</button>
                 <button onClick={async () => {
                     await toast.promise(
                         saveDraft(),
                         {
-                          pending: 'Promise is pending',
-                          success: 'Promise resolved 👌',
-                          error: 'Promise rejected 🤯'
+                          pending: 'Loading...',
+                          success: 'Draft Saved',
+                          error: 'Error occured while saving blog'
                         }
-                    )
+                    ).catch((e)=>{
+                        if(axios.isAxiosError(e)){
+                            toast.error(e.response?.data.message)
+                        }
+                    })
                     toast.done("Draft Saved")
                     navigate("/blogs")
 

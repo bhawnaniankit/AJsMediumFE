@@ -1,7 +1,9 @@
 import WriteSpace from "../components/WriteSpace"
 import AppBar from "../components/AppBar"
 import { userGlobal } from "./Blogs"
+import checkLogged from "../utills/checkLogged"
 const AddBlog = () => {
+    checkLogged()
     return (<>
         <AppBar author={userGlobal.name} ></AppBar>
         <div className=" flex mx-8 lg:mx-40 my-6 h-10 gap-4 items-start">

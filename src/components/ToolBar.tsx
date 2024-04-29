@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import { IoIosAdd } from "react-icons/io";
+import { memo } from "react";
 
-const ToolBar = () => {
+const ToolBar = memo(() => {
     //check outline and border
     return (
         <div className="flex gap-3 text-gray-600 items-center py-2 outline-2 outline-black font-bold">
@@ -9,6 +10,6 @@ const ToolBar = () => {
             <div className=" cursor-pointer hover:border-b-2 border-black">Blogs</div>
         </div>
     )
-}
+})
 
 export default ToolBar
