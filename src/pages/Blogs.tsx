@@ -4,11 +4,12 @@ import useBlogs from "../hooks/useBlogs"
 import BlogSkleton from "../components/BlogSkleton"
 import ToolBar from "../components/ToolBar"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { getTime } from "../utills/getTime"
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { toast } from "react-toastify"
 
 export interface userType {
     name: string,
@@ -23,9 +24,12 @@ export let userGlobal: userType = {
 }
 
 const Blogs = () => {
-    const { loading, blogs } = useBlogs();
+    const { loading, blogs,setBlogs } = useBlogs();
+    const [page,setPage]=useState(1);
     const navigate = useNavigate();
     const jwt = localStorage.getItem("token");
+    const [hasMore,setHasmore]=useState(true)
+    
     useEffect(() => {
         if (!jwt) {
             navigate("/signin")
@@ -33,7 +37,7 @@ const Blogs = () => {
         }
         axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).then((res) => {
             userGlobal = res.data;
-            Object.freeze(userGlobal)
+            Object.freeze(userGlobal) //set userGlobal to be a constant
         })
     }, [])
 
@@ -66,11 +70,38 @@ const Blogs = () => {
                 <div>
                     <InfiniteScroll
                     dataLength={blogs.length}
-                    next={()=>{console.log("fetch");
+                    next={()=>{
+                        setPage((page)=>page+1);
+                        let skip=(page-1)*5;
+                        axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+                            headers: {
+                                Authorization: localStorage.getItem("token")
+                            },
+                            params:{
+                                skip:skip,
+                                take:5
+                            }
+                        }).then((res:any) => {
+                            if(res.data.length>0){
+                                let newBlogs=blogs; //as objects are passed by ref setBlogs does'nt reload the componet as the ref has'nt changed
+                                newBlogs=newBlogs.concat(res.data)
+                                setBlogs(newBlogs)
+                            }
+                            else{
+                                setHasmore(false);
+                            }
+                        }).catch(((e:any)=>{
+                            toast.error(e.response.data.erro,{
+                                position: "bottom-right"})
+                        }))
                     }}
-                    hasMore={true} // Replace with a condition based on your data source
-                    loader={<p>Loading...</p>}
-                    endMessage={<p>No more data to load.</p>}
+                    hasMore={hasMore} // Replace with a condition based on your data source
+                    loader={
+                        <div className="my-8">
+                            <BlogSkleton></BlogSkleton>
+                        </div>
+                }
+                    endMessage={<p>SEEMS LIKE YOU HAVE REACHED THE END</p>}
                     >
                     <ul>
                         {blogs.map(blog => {

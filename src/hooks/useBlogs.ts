@@ -21,6 +21,10 @@ function useBlogs() {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
             headers: {
                 Authorization: localStorage.getItem("token")
+            },
+            params:{
+                take:10,
+                skip:0
             }
         }).then((res) => {
             setBlogs(res.data);
@@ -31,7 +35,7 @@ function useBlogs() {
         }))
     }, []);
 
-    return { loading, blogs };
+    return { loading, blogs,setBlogs };
 }
 
 export default useBlogs

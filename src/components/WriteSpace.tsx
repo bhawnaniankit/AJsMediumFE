@@ -11,7 +11,7 @@ const WriteSpace = () => {
     const [content, setContent] = useState<string>("")
     async function saveDraft() {
         try {
-            const res = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
+            const res =  axios.post(`${BACKEND_URL}/api/v1/blog`, {
                 title,
                 content
             }, {
@@ -19,11 +19,11 @@ const WriteSpace = () => {
                     Authorization: localStorage.getItem("token")
                 }
             })
-            return res.data;
+            return res;
         } catch (e) {
             if (isAxiosError(e))
-                alert(e.response?.data.message);
-            console.log(e);
+                toast(e.response?.data.message);
+                console.log(e);
         }
     }
 
@@ -40,25 +40,39 @@ const WriteSpace = () => {
     }
     return (
         <div className=" w-full flex flex-col h-screen">
-            <input type="text" onChange={(e) => { setTitle(e.target.value) }} placeholder="Title" className=" border border-l-2 focus:outline-0 p-4 text-2xl md:text-4xl  " />
-            <textarea onChange={(e) => { setContent(e.target.value) }} className=" h-full border md:pr-10 p-4 block w-full focus:outline-0 text-sm md:text-lg" placeholder="Tell Your Story" ></textarea>
+            <input type="text" onChange={(e) => { setTitle(e.target.value) }} placeholder="Title" className="  border-l-2 focus:outline-0 p-4 text-2xl md:text-4xl  " />
+            <textarea onChange={(e) => { setContent(e.target.value) }} className=" h-full  md:pr-10 p-4 block w-full focus:outline-0 text-sm md:text-lg" placeholder="Tell Your Story" ></textarea>
             <hr />
             <div className=" mx-4 justify-end flex gap-3">
                 <button onClick={async () => {
-                    const res = await saveDraft();
-                    publishBlog(res.id);
+                    const res = await toast.promise(
+                        saveDraft(),
+                        {
+                          pending: 'Promise is pending',
+                          success: 'Promise resolved 👌',
+                          error: 'Promise rejected 🤯'
+                        }
+                    )
+                    publishBlog(res?.data.id);
                     toast.done("Published")
                     // navigate("/blogs")
 
                 }} className=" border-2 p-2 bg-black my-4 font-semibold rounded-md text-white">Publish</button>
-                <button onClick={() => {
-                    saveDraft()
+                <button onClick={async () => {
+                    await toast.promise(
+                        saveDraft(),
+                        {
+                          pending: 'Promise is pending',
+                          success: 'Promise resolved 👌',
+                          error: 'Promise rejected 🤯'
+                        }
+                    )
                     toast.done("Draft Saved")
                     navigate("/blogs")
 
                 }} className="border-2 p-2 bg-black my-4 font-semibold rounded-md text-white">Save Draft</button>
             </div>
-            <ToastContainer></ToastContainer>
+            <ToastContainer stacked></ToastContainer>
         </div>
     )
 }
