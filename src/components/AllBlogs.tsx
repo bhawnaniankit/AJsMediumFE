@@ -62,7 +62,7 @@ const AllBlogs = () => {
                         loader={""}
                         endMessage={<p>SEEMS LIKE YOU HAVE REACHED THE END</p>}
                         >
-                        <ul>
+                        <ul className="flex flex-col gap-6">
                             {blogs.map(blog => {
                             const date = blog.createdAt;
                             return <li key={blog.id}><BlogCard key={blog.id} author={blog.author.name} id={blog.id} title={blog.title} content={`${blog.content.slice(0, 500)}....`} publishedDate={getTime(date)}></BlogCard></li>
