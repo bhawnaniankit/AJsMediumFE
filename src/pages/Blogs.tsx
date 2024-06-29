@@ -10,12 +10,6 @@ export interface userType {
     email: string
 }
 
-export let userGlobal: userType = {
-    name: "",
-    username: "",
-    email: ""
-}
-
 const Blogs = () => {
     checkLogged();
     return (<div className=" flex flex-col gap-4 md:gap-12">

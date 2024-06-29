@@ -1,5 +1,4 @@
 import AppBar from "../components/AppBar";
-import { userGlobal } from "./Blogs";
 import { CgProfile } from "react-icons/cg";
 import BlogCompo from "../components/BlogCompo";
 import checkLogged from "../utills/checkLogged";
@@ -10,7 +9,7 @@ export const Blog = () => {
    
     if (false) {
         return <>
-                <AppBar author=""></AppBar>
+                <AppBar></AppBar>
                 <div className=" animate-pulse flex-col md:flex-row flex gap-8 mx-10 my-6 md:mx-44 md:my-10">
                     <div className=" md:w-2/3">
                         <div className=" rounded-md bg-gray-200 h-24 my-2"></div>
@@ -35,7 +34,7 @@ export const Blog = () => {
 
     return (
         <>
-            <AppBar author={userGlobal.name}></AppBar>
+            <AppBar></AppBar>
             <BlogCompo></BlogCompo>
         </>
     )
