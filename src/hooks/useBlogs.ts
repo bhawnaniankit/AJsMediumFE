@@ -27,8 +27,6 @@ function useBlogs() {
                 skip:0
             }
         }).then((res) => {
-            console.log(res);
-            
             setBlogs(res.data);
             setLoading(false);
         }).catch(((e:any)=>{

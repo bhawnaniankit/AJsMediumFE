@@ -6,7 +6,6 @@ import axios, { AxiosError } from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 export const SigninCompo = () => {
-    console.log("hello from signin compo");
     let userTimer:ReturnType<typeof setTimeout> = setTimeout(() => '', 1000);
     let passwordTimer:ReturnType<typeof setTimeout> = setTimeout(() => '', 1000);
     const navigate = useNavigate();

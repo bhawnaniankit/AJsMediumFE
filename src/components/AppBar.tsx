@@ -3,7 +3,7 @@ import { IoIosAdd } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = ({ author }: { author: string }) => {    
+const AppBar = () => {    
     const Navigate = useNavigate();
     function logoutHandler() {
         localStorage.removeItem("token");
@@ -17,7 +17,6 @@ const AppBar = ({ author }: { author: string }) => {
             </div>
             <div className=" text-xl flex items-center gap-5">
                 <Link className=" hidden md:block" to={"/write"}> <IoIosAdd></IoIosAdd></Link>
-                <div className=" text-sm md:text-lg">{author}</div>
                 <div onClick={logoutHandler} className=" cursor-pointer text-sm md:text-2xl">
                     <IoIosLogOut></IoIosLogOut>
                 </div>
