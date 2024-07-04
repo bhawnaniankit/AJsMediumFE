@@ -9,11 +9,13 @@ const checkLogged = () => {
     const jwt=localStorage.getItem("token")
     useEffect(()=>{
         if(!jwt){
-            navigate("/signin")
-            toast.error("Unauthorized")
+            navigate("/signin");
+            toast.error("Unauthorized");
             return
         }
-        axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).catch(()=>{
+        axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).then(()=>{
+            navigate("/blogs");
+        }).catch(()=>{
             navigate("/signin");
         })
     },[])

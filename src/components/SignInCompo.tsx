@@ -4,6 +4,7 @@ import { SigninInput } from '@aj_devs/common-final';
 import { BACKEND_URL } from '../config';
 import axios, { AxiosError } from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import checkLogged from '../utills/checkLogged';
 
 export const SigninCompo = () => {
     let userTimer:ReturnType<typeof setTimeout> = setTimeout(() => '', 1000);
@@ -13,6 +14,7 @@ export const SigninCompo = () => {
         username: "",
         password: ""
     });
+    checkLogged();
     let signinBtn=useRef<HTMLButtonElement>(null);
     async function signRequest() {
         try {
