@@ -4,10 +4,10 @@ import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { centralBlogsAtom, filteredBlogsAtom } from "../store/atoms/blogs";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useDebounce } from "../hooks/useDebouncer";
-import React, { useEffect } from "react";
+// import { useDebounce } from "../hooks/useDebouncer";
+import React from "react";
 
-const AppBar =React.forwardRef((props,ref:React.ForwardedRef<HTMLInputElement>) => {    
+const AppBar =React.forwardRef((_props,ref:React.ForwardedRef<HTMLInputElement>) => {    
     console.log("appbar");  
     const navigate = useNavigate();
     const setFilteredBlogs=useSetRecoilState(filteredBlogsAtom);
