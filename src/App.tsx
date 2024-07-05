@@ -18,7 +18,7 @@ function App() {
     })
     return ()=>{
       window.removeEventListener("keydown",(e:KeyboardEvent)=>{
-        if(e.key=="/" && e.ctrlKey){
+        if(e.key=="/" && e.ctrlKey ){
           e.preventDefault()
           inputRef.current.focus();
         }
