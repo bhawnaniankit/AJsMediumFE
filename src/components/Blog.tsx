@@ -2,7 +2,6 @@ import { blog } from "../hooks/useBlog";
 
 
 const Blog = ({ data }: { data: blog }) => {
-
     return (
         <div className=" md:w-2/3">
             <div className=" text-3xl md:text-6xl font-sans font-bold my-2">{data.title}</div>

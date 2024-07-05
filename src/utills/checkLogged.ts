@@ -5,19 +5,20 @@ import axios from "axios"
 import { BACKEND_URL } from "../config"
 
 const checkLogged = () => {
-    const navigate=useNavigate()
+    const navigate=useNavigate();
     const jwt=localStorage.getItem("token")
     useEffect(()=>{
-        if(!jwt){
-            navigate("/signin");
-            toast.error("Unauthorized");
-            return
+        async function check(){
+            if(!jwt){
+                navigate("/signin");
+                toast.error("Unauthorized");
+                return
+            }
+            await axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).catch(()=>{
+                return navigate("/signin");
+            })
         }
-        axios.get(`${BACKEND_URL}/api/v1/user/${jwt}`).then(()=>{
-            navigate("/blogs");
-        }).catch(()=>{
-            navigate("/signin");
-        })
+        check();
     },[])
 }
 
